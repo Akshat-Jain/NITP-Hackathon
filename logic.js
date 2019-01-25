@@ -47,7 +47,8 @@ async function updatePatientRecords(recordData){
                       if(patient.myRecord==null){
                         patient.myRecord = [];
                       }
-                      patient.myRecord.push(String(recordData));
+                    console.log(typeof recordData);
+                      patient.myRecord.push(recordData);
                     //patient.myRecord = 88; 
                     return patientRegistry.update(patient);
                 })
