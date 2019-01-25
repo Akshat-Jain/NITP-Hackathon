@@ -22,50 +22,51 @@
 
 async function CreateMedicalRecord(recordData){
 
-  	return getParticipantRegistry('org.ehr.hackathon.Patient')
+    return getParticipantRegistry('org.ehr.hackathon.Patient')
             .then(function(patientRegistry) {
                   console.log("OK");
                   return patientRegistry.get(recordData.patient.patientId).then(function(patient){
                     console.log("BBB");
                       if(patient.myRecord==null){
-                      	patient.myRecord = [];
+                        patient.myRecord = [];
                       }
-                      patient.myRecord.push(recordData);
-                     return patientRegistry.update(patient);
+                      patient.myRecord.push(String(recordData));
+                    //patient.myRecord = 88; 
+                    return patientRegistry.update(patient);
                 })
             })
  
   
   /*
-	return getAssetRegistry('org.ehr.hackathon.MedicalRecord')
-  		.then(function(medicalRecordsList){
-      		var factory = getFactory();
-      		var recordId = recordData.doctor.firstName + '_' + recordData.patient.firstName + '_' + new Date().toLocaleDateString() + '_' + new Date().toLocaleTimeString();
-      		var medicalRecord = factory.newResource('org.ehr.hackathon', 'MedicalRecord', recordId);
-      		medicalRecord.patient = recordData.patient;
+  return getAssetRegistry('org.ehr.hackathon.MedicalRecord')
+      .then(function(medicalRecordsList){
+          var factory = getFactory();
+          var recordId = recordData.doctor.firstName + '_' + recordData.patient.firstName + '_' + new Date().toLocaleDateString() + '_' + new Date().toLocaleTimeString();
+          var medicalRecord = factory.newResource('org.ehr.hackathon', 'MedicalRecord', recordId);
+          medicalRecord.patient = recordData.patient;
             medicalRecord.doctor = recordData.doctor;
-    		return medicalRecordsList.add(medicalRecord);
+        return medicalRecordsList.add(medicalRecord);
     })
     */
       //.
-    	//then(updatePatientRecords(medicalRecordsList));
+      //then(updatePatientRecords(medicalRecordsList));
 }
 
 function updatePatientRecords(recordData){
             var patientRecords = getParticipantRegistry('org.ehr.hackathon.Patient');  
       
-      		console.log("pid : " + recordData.patient.patientId);
+          console.log("pid : " + recordData.patient.patientId);
             console.log('\n' + patientRecords);
-      		for (var i = 0; i < patientRecords.size(); i++) {
-              	console.log(patientRecords[i].patientId);
+          for (var i = 0; i < patientRecords.size(); i++) {
+                console.log(patientRecords[i].patientId);
             }
-      		var patient = patientRecords.get(recordData.patient.patientId);
-      		if(patient.myRecords == null){
-            	patient.myRecords = [];
+          var patient = patientRecords.get(recordData.patient.patientId);
+          if(patient.myRecords == null){
+              patient.myRecords = [];
             }
-      		patient.myRecords.push(recordData);
+          patient.myRecords.push(recordData);
             console.log(patient + '\n');
-      		patientRecords.update(patient.patientId);
+          patientRecords.update(patient.patientId);
     }
 
 
