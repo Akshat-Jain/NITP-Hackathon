@@ -2,9 +2,9 @@
   "engines": {
     "composer": "^0.19.12"
   },
-  "name": "poc",
-  "version": "2.0.14",
-  "description": "this is ehr",
+  "name": "ehr",
+  "version": "1.0.0",
+  "description": "EHR System for storing patient records",
   "scripts": {
     "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/poc.bna",
     "pretest": "npm run lint",
