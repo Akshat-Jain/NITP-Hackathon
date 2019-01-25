@@ -1,1 +1,1 @@
-# NITP-Hackathon
+# README
